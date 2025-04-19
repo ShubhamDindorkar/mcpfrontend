@@ -4,7 +4,6 @@ import "./globals.css";
 import Link from "next/link";
 import { GridBackground } from "../components/ui/gridbackground";
 import { Spotlight } from "../components/ui/spotlight";
-import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

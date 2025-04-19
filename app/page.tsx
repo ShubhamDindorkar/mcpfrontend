@@ -73,30 +73,35 @@ function ScrollArrows({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement
 }
 
 export default function Home() {
+  // Declare a ref for each section at the top level
+  const scrollRef0 = useRef<HTMLDivElement>(null);
+  const scrollRef1 = useRef<HTMLDivElement>(null);
+  const scrollRef2 = useRef<HTMLDivElement>(null);
+  const scrollRefs = [scrollRef0, scrollRef1, scrollRef2];
   return (
     <main className="w-full">
       <Hero heroClassName="pt-16 pb-0 mb-10" />
       <div className="flex flex-col w-full max-w-7xl mx-auto px-4 pt-0 py-0">
-        {sections.map((section, idx) => {
-          const scrollRef = useRef<HTMLDivElement>(null);
-          return (
-            <div key={section.title} className={`w-full relative py-2${idx === 0 ? ' mt-6' : ''}`}>
-              <div className="flex items-center justify-between mb-2 px-2">
-                <h2 className="text-2xl font-bold text-white m-0 p-0 leading-tight">{section.title}</h2>
-                <ScrollArrows scrollRef={scrollRef} />
-              </div>
-              <div className="relative">
-                <div ref={scrollRef} className="flex flex-row gap-x-6 overflow-x-auto pb-2 px-2 hide-scrollbar">
-                  {section.cards.map((card, i) => (
-                    <div key={i} className="min-w-[340px] sm:min-w-[380px] md:min-w-[420px] max-w-sm flex-shrink-0">
-                      <Card {...card} />
-                    </div>
-                  ))}
-                </div>
+        {sections.map((section, idx) => (
+          <div key={section.title} className={`w-full relative py-2${idx === 0 ? ' mt-6' : ''}`}>
+            <div className="flex items-center justify-between mb-2 px-2">
+              <h2 className="text-2xl font-bold text-white m-0 p-0 leading-tight">{section.title}</h2>
+              <ScrollArrows scrollRef={scrollRefs[idx]} />
+            </div>
+            <div className="relative">
+              <div
+                ref={scrollRefs[idx]}
+                className="flex flex-row gap-x-6 overflow-x-auto pb-2 px-2 hide-scrollbar"
+              >
+                {section.cards.map((card, i) => (
+                  <div key={i} className="min-w-[340px] sm:min-w-[380px] md:min-w-[420px] max-w-sm flex-shrink-0">
+                    <Card {...card} />
+                  </div>
+                ))}
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </main>
   );

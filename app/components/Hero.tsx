@@ -1,6 +1,5 @@
 import React from "react";
 import { TypewriterEffect } from "../../components/ui/typewriter-effect";
-import { GlowingEffect } from "../../components/ui/glowing-effect";
 
 export default function Hero({ heroClassName = "" }: { heroClassName?: string }) {
   return (
