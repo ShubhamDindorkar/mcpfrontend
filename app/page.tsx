@@ -86,11 +86,11 @@ export default function Home() {
           <div key={section.title} className={`w-full relative py-2${idx === 0 ? ' mt-6' : ''}`}>
             <div className="flex items-center justify-between mb-2 px-2">
               <h2 className="text-2xl font-bold text-white m-0 p-0 leading-tight">{section.title}</h2>
-              <ScrollArrows scrollRef={scrollRefs[idx]} />
+              <ScrollArrows scrollRef={scrollRefs[idx] as React.RefObject<HTMLDivElement>} />
             </div>
             <div className="relative">
               <div
-                ref={scrollRefs[idx]}
+                ref={scrollRefs[idx] as React.RefObject<HTMLDivElement>}
                 className="flex flex-row gap-x-6 overflow-x-auto pb-2 px-2 hide-scrollbar"
               >
                 {section.cards.map((card, i) => (
