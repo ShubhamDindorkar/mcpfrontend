@@ -60,6 +60,15 @@
   overflow: hidden;
 }
 
+/* Hide scrollbar utility */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
