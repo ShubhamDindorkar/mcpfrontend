@@ -1,16 +1,15 @@
 import React from "react";
 import { CardContainer, CardBody } from "../../components/ui/3d-card";
-import Link from "next/link";
 
 type CardProps = {
   name: string;
   description: string;
-  publisher?: string;
-  language?: string;
-  views?: number;
+  publisher: string;
+  language: string;
+  views: number;
 };
 
-export default function Card({ name, description }: CardProps) {
+export default function Card({ name, description, publisher, language, views }: CardProps) {
   return (
     <CardContainer className="w-full h-full">
       <CardBody className="w-full h-full">
@@ -21,12 +20,13 @@ export default function Card({ name, description }: CardProps) {
               <h3 className="text-lg font-semibold text-white mb-1 truncate" title={name}>{name}</h3>
               <p className="text-sm text-[#b0b6be] mb-4 line-clamp-2" title={description}>{description}</p>
             </div>
-            <Link
-              href={`/mcp/${encodeURIComponent(name)}`}
-              className="mt-4 inline-block bg-[#393BB2] hover:bg-[#2d2f7a] text-white font-semibold py-2 px-4 rounded transition-colors text-center"
-            >
-              View Details
-            </Link>
+            <div className="flex items-center justify-between text-xs text-[#8a8f98] mt-2 pt-2 border-t border-[#23272f]">
+              <span>{publisher}</span>
+              <span className="inline-flex items-center gap-2">
+                <span className="bg-[#23272f] px-2 py-0.5 text-[#b0b6be] rounded">{language}</span>
+                <span className="ml-2">👁 {views}</span>
+              </span>
+            </div>
           </div>
         </div>
       </CardBody>

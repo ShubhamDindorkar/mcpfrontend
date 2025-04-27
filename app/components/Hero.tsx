@@ -1,7 +1,7 @@
 import React from "react";
 import { TypewriterEffect } from "../../components/ui/typewriter-effect";
 
-export default function Hero({ heroClassName = "", search, setSearch }: { heroClassName?: string, search: string, setSearch: (s: string) => void }) {
+export default function Hero({ heroClassName = "" }: { heroClassName?: string }) {
   return (
     <section className={`relative w-full flex flex-col items-center justify-start gap-4 sm:gap-8 overflow-hidden px-4 sm:px-0 ${heroClassName}`}>
       <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-col items-center gap-4 sm:gap-8">
@@ -17,10 +17,17 @@ export default function Hero({ heroClassName = "", search, setSearch }: { heroCl
               type="text"
               className="relative z-10 w-full h-full px-4 py-2 sm:px-5 sm:py-3 bg-[#181c22] border-none text-white placeholder-[#b0b6be] focus:outline-none focus:ring-0 rounded-full"
               placeholder="Search MCP servers..."
-              value={search ?? ""}
-              onChange={e => setSearch(e.target.value)}
             />
           </span>
+          <button
+            type="submit"
+            className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 z-10"
+          >
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              Enter
+            </span>
+          </button>
         </div>
       </div>
     </section>
