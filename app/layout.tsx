@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { GridBackground } from "../components/ui/gridbackground";
-import { Spotlight } from "../components/ui/spotlight";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,52 +26,76 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900`}
       >
-        {/* Global grid and spotlight backgrounds */}
-        <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none">
-          <GridBackground />
-          <Spotlight fill="#a259f7" className="absolute inset-0 w-full h-full z-10 opacity-20" />
-        </div>
+        {/* Background dot pattern */}
+        <div className="fixed inset-0 w-full h-full bg-[radial-gradient(#33333322_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none -z-10"></div>
+        
         {/* Navbar */}
-        <nav className="w-full flex items-center justify-between px-8 py-4 bg-transparent backdrop-blur-md z-50 relative">
-          <div className="flex items-center gap-3">
+        <header className="border-b border-gray-800/60 backdrop-blur-sm sticky top-0 z-50">
+          <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 group">
-              {/* Animated logo: swap color on dark/light mode */}
-              <span className="transition-colors duration-500 text-2xl font-bold tracking-tight text-[#171717] dark:text-white group-hover:text-[#a259f7] dark:group-hover:text-[#a259f7]">mcpnexus</span>
-              <span className="ml-1 w-3 h-3 rounded-full bg-[#a259f7] animate-pulse transition-all duration-500 group-hover:scale-125" />
-            </Link>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
-              className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-                Github
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-300 group-hover:opacity-80">
+                mcpnexus
               </span>
-            </a>
-            <Link href="/publish"
-              className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+            </Link>
+            
+            <div className="flex items-center gap-3">
+              <Link 
+                href="https://github.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              >
+                GitHub
+              </Link>
+              
+              <Link 
+                href="/publish"
+                className="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              >
                 Publish MCP
-              </span>
-            </Link>
-            <Link href="/signup"
-              className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-                SignUp
-              </span>
-            </Link>
-          </div>
-        </nav>
-        <div className="min-h-[calc(100vh-48px)] flex flex-col">
+              </Link>
+              
+              <Link 
+                href="/signup"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors"
+              >
+                Sign Up
+              </Link>
+            </div>
+          </nav>
+        </header>
+
+        {/* Main content */}
+        <main className="flex-grow">
           {children}
-        </div>
+        </main>
+
         {/* Footer */}
-        <footer className="w-full py-4 px-8 bg-[#111418] border-t border-[#23272f] text-center text-xs text-[#888] mt-auto">
-          mcpnexus &copy; {new Date().getFullYear()} | Discover and publish MCP servers
+        <footer className="border-t border-gray-800/60 py-6 mt-auto">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-semibold text-gray-300">mcpnexus</span>
+              <span className="text-sm text-gray-500">© {new Date().getFullYear()}</span>
+            </div>
+            
+            <div className="flex items-center gap-6">
+              <Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
+                About
+              </Link>
+              <Link href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Terms
+              </Link>
+              <Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Privacy
+              </Link>
+              <Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Contact
+              </Link>
+            </div>
+          </div>
         </footer>
       </body>
     </html>
